@@ -18,166 +18,166 @@ CREATE SCHEMA IF NOT EXISTS `codecut_DB` ;
 USE `codecut_DB` ;
 
 -- -----------------------------------------------------
--- Table `codecut_DB`.`Usuario`
+-- Table `codecut_DB`.`user`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `codecut_DB`.`Usuario` (
-  `idUsuario` INT NOT NULL AUTO_INCREMENT,
-  `Nombre` VARCHAR(85) NOT NULL,
-  `Apellido` VARCHAR(85) NOT NULL,
-  `Correo` VARCHAR(80) NOT NULL,
-  `Contrasena` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idUsuario`),
-  UNIQUE INDEX `idUsuario_UNIQUE` (`idUsuario` ASC) VISIBLE,
-  UNIQUE INDEX `Correo_UNIQUE` (`Correo` ASC) VISIBLE)
+CREATE TABLE IF NOT EXISTS `codecut_DB`.`user` (
+  `idUser` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(85) NOT NULL,
+  `lastName` VARCHAR(85) NOT NULL,
+  `email` VARCHAR(80) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idUser`),
+  UNIQUE INDEX `idUsuario_UNIQUE` (`idUser` ASC) VISIBLE,
+  UNIQUE INDEX `Correo_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `codecut_DB`.`Productos`
+-- Table `codecut_DB`.`products`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `codecut_DB`.`Productos` (
-  `idProductos` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(100) NOT NULL,
-  `precio` DECIMAL NOT NULL,
-  `descripcion` VARCHAR(200) NOT NULL,
+CREATE TABLE IF NOT EXISTS `codecut_DB`.`products` (
+  `idProducts` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  `price` DECIMAL NOT NULL,
+  `description` VARCHAR(200) NOT NULL,
   `stock` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`idProductos`),
-  UNIQUE INDEX `idProductos_UNIQUE` (`idProductos` ASC) VISIBLE)
+  PRIMARY KEY (`idProducts`),
+  UNIQUE INDEX `idProductos_UNIQUE` (`idProducts` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `codecut_DB`.`Servicios`
+-- Table `codecut_DB`.`services`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `codecut_DB`.`Servicios` (
-  `idServicios` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(100) NOT NULL,
-  `descripcion` VARCHAR(200) NOT NULL,
-  `precio` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`idServicios`),
-  UNIQUE INDEX `idServicios_UNIQUE` (`idServicios` ASC) VISIBLE)
+CREATE TABLE IF NOT EXISTS `codecut_DB`.`services` (
+  `idServices` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  `description` VARCHAR(200) NOT NULL,
+  `price` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`idServices`),
+  UNIQUE INDEX `idServicios_UNIQUE` (`idServices` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `codecut_DB`.`Empleado`
+-- Table `codecut_DB`.`employee`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `codecut_DB`.`Empleado` (
-  `idEmpleado` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(150) NOT NULL,
-  `apellido` VARCHAR(100) NOT NULL,
-  `edad` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`idEmpleado`),
-  UNIQUE INDEX `idEmpleado_UNIQUE` (`idEmpleado` ASC) VISIBLE)
+CREATE TABLE IF NOT EXISTS `codecut_DB`.`employee` (
+  `idEmployee` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(150) NOT NULL,
+  `lastName` VARCHAR(100) NOT NULL,
+  `age` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`idEmployee`),
+  UNIQUE INDEX `idEmpleado_UNIQUE` (`idEmployee` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `codecut_DB`.`Pedido`
+-- Table `codecut_DB`.`order`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `codecut_DB`.`Pedido` (
-  `idPedido` INT NOT NULL AUTO_INCREMENT,
-  `direccion` VARCHAR(300) NOT NULL,
-  `montoTotal` DECIMAL NOT NULL,
-  `Usuario_idUsuario` INT NOT NULL,
-  PRIMARY KEY (`idPedido`),
-  UNIQUE INDEX `idPedido_UNIQUE` (`idPedido` ASC) VISIBLE,
-  INDEX `fk_Pedido_Usuario1_idx` (`Usuario_idUsuario` ASC) VISIBLE,
-  CONSTRAINT `fk_Pedido_Usuario1`
-    FOREIGN KEY (`Usuario_idUsuario`)
-    REFERENCES `codecut_DB`.`Usuario` (`idUsuario`)
+CREATE TABLE IF NOT EXISTS `codecut_DB`.`order` (
+  `idOrder` INT NOT NULL AUTO_INCREMENT,
+  `address` VARCHAR(300) NOT NULL,
+  `totalAmount` DECIMAL NOT NULL,
+  `user_idUser` INT NOT NULL,
+  PRIMARY KEY (`idOrder`),
+  UNIQUE INDEX `idPedido_UNIQUE` (`idOrder` ASC) VISIBLE,
+  INDEX `fk_order_user1_idx` (`user_idUser` ASC) VISIBLE,
+  CONSTRAINT `fk_order_user1`
+    FOREIGN KEY (`user_idUser`)
+    REFERENCES `codecut_DB`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `codecut_DB`.`Pago`
+-- Table `codecut_DB`.`payment`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `codecut_DB`.`Pago` (
-  `idPago` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `MetodoPago` INT UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `codecut_DB`.`payment` (
+  `idPayment` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `typePayment` INT UNSIGNED NOT NULL,
+  `status` VARCHAR(45) NOT NULL,
+  `order_idOrder` INT NOT NULL,
+  PRIMARY KEY (`idPayment`, `order_idOrder`),
+  UNIQUE INDEX `idPago_UNIQUE` (`idPayment` ASC) VISIBLE,
+  INDEX `fk_payment_order1_idx` (`order_idOrder` ASC) VISIBLE,
+  CONSTRAINT `fk_payment_order1`
+    FOREIGN KEY (`order_idOrder`)
+    REFERENCES `codecut_DB`.`order` (`idOrder`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `codecut_DB`.`appointment`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `codecut_DB`.`appointment` (
+  `idAppointment` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `DateHour` DATETIME NOT NULL,
   `Status` VARCHAR(45) NOT NULL,
-  `Pedido_idPedido` INT NOT NULL,
-  PRIMARY KEY (`idPago`, `Pedido_idPedido`),
-  UNIQUE INDEX `idPago_UNIQUE` (`idPago` ASC) VISIBLE,
-  INDEX `fk_Pago_Pedido1_idx` (`Pedido_idPedido` ASC) VISIBLE,
-  CONSTRAINT `fk_Pago_Pedido1`
-    FOREIGN KEY (`Pedido_idPedido`)
-    REFERENCES `codecut_DB`.`Pedido` (`idPedido`)
+  `user_idUser` INT NOT NULL,
+  PRIMARY KEY (`idAppointment`),
+  UNIQUE INDEX `idCita_UNIQUE` (`idAppointment` ASC) VISIBLE,
+  INDEX `fk_appointment_user1_idx` (`user_idUser` ASC) VISIBLE,
+  CONSTRAINT `fk_appointment_user1`
+    FOREIGN KEY (`user_idUser`)
+    REFERENCES `codecut_DB`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `codecut_DB`.`Cita`
+-- Table `codecut_DB`.`detailsOrder`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `codecut_DB`.`Cita` (
-  `idCita` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `FechaHora` DATETIME NOT NULL,
-  `Status` VARCHAR(45) NOT NULL,
-  `Usuario_idUsuario` INT NOT NULL,
-  PRIMARY KEY (`idCita`),
-  UNIQUE INDEX `idCita_UNIQUE` (`idCita` ASC) VISIBLE,
-  INDEX `fk_Cita_Usuario1_idx` (`Usuario_idUsuario` ASC) VISIBLE,
-  CONSTRAINT `fk_Cita_Usuario1`
-    FOREIGN KEY (`Usuario_idUsuario`)
-    REFERENCES `codecut_DB`.`Usuario` (`idUsuario`)
+CREATE TABLE IF NOT EXISTS `codecut_DB`.`detailsOrder` (
+  `idDetailsOrder` INT NOT NULL AUTO_INCREMENT,
+  `qtyProduct` INT UNSIGNED NOT NULL,
+  `products_idProducts` INT NOT NULL,
+  `order_idOrder` INT NOT NULL,
+  PRIMARY KEY (`idDetailsOrder`, `products_idProducts`, `order_idOrder`),
+  UNIQUE INDEX `idDetallePedido_UNIQUE` (`idDetailsOrder` ASC) VISIBLE,
+  INDEX `fk_detailsOrder_products1_idx` (`products_idProducts` ASC) VISIBLE,
+  INDEX `fk_detailsOrder_order1_idx` (`order_idOrder` ASC) VISIBLE,
+  CONSTRAINT `fk_detailsOrder_products1`
+    FOREIGN KEY (`products_idProducts`)
+    REFERENCES `codecut_DB`.`products` (`idProducts`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_detailsOrder_order1`
+    FOREIGN KEY (`order_idOrder`)
+    REFERENCES `codecut_DB`.`order` (`idOrder`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `codecut_DB`.`DetallePedido`
+-- Table `codecut_DB`.`appointment_has_services`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `codecut_DB`.`DetallePedido` (
-  `idDetallePedido` INT NOT NULL AUTO_INCREMENT,
-  `cantidadProducto` INT UNSIGNED NOT NULL,
-  `Pedido_idPedido` INT NOT NULL,
-  `Productos_idProductos` INT NOT NULL,
-  PRIMARY KEY (`idDetallePedido`, `Pedido_idPedido`, `Productos_idProductos`),
-  UNIQUE INDEX `idDetallePedido_UNIQUE` (`idDetallePedido` ASC) VISIBLE,
-  INDEX `fk_DetallePedido_Pedido_idx` (`Pedido_idPedido` ASC) VISIBLE,
-  INDEX `fk_DetallePedido_Productos1_idx` (`Productos_idProductos` ASC) VISIBLE,
-  CONSTRAINT `fk_DetallePedido_Pedido`
-    FOREIGN KEY (`Pedido_idPedido`)
-    REFERENCES `codecut_DB`.`Pedido` (`idPedido`)
+CREATE TABLE IF NOT EXISTS `codecut_DB`.`appointment_has_services` (
+  `appointment_idAppointment` INT UNSIGNED NOT NULL,
+  `services_idServices` INT NOT NULL,
+  `employee_idEmployee` INT NOT NULL,
+  PRIMARY KEY (`appointment_idAppointment`, `services_idServices`, `employee_idEmployee`),
+  INDEX `fk_appointment_has_services_services1_idx` (`services_idServices` ASC) VISIBLE,
+  INDEX `fk_appointment_has_services_appointment1_idx` (`appointment_idAppointment` ASC) VISIBLE,
+  INDEX `fk_appointment_has_services_employee1_idx` (`employee_idEmployee` ASC) VISIBLE,
+  CONSTRAINT `fk_appointment_has_services_appointment1`
+    FOREIGN KEY (`appointment_idAppointment`)
+    REFERENCES `codecut_DB`.`appointment` (`idAppointment`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_DetallePedido_Productos1`
-    FOREIGN KEY (`Productos_idProductos`)
-    REFERENCES `codecut_DB`.`Productos` (`idProductos`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `codecut_DB`.`Servicios_has_Cita`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `codecut_DB`.`Servicios_has_Cita` (
-  `Servicios_idServicios` INT NOT NULL,
-  `Cita_idCita` INT UNSIGNED NOT NULL,
-  `Empleado_idEmpleado` INT NOT NULL,
-  PRIMARY KEY (`Servicios_idServicios`, `Cita_idCita`, `Empleado_idEmpleado`),
-  INDEX `fk_Servicios_has_Cita_Cita1_idx` (`Cita_idCita` ASC) VISIBLE,
-  INDEX `fk_Servicios_has_Cita_Servicios1_idx` (`Servicios_idServicios` ASC) VISIBLE,
-  INDEX `fk_Servicios_has_Cita_Empleado1_idx` (`Empleado_idEmpleado` ASC) VISIBLE,
-  CONSTRAINT `fk_Servicios_has_Cita_Servicios1`
-    FOREIGN KEY (`Servicios_idServicios`)
-    REFERENCES `codecut_DB`.`Servicios` (`idServicios`)
+  CONSTRAINT `fk_appointment_has_services_services1`
+    FOREIGN KEY (`services_idServices`)
+    REFERENCES `codecut_DB`.`services` (`idServices`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Servicios_has_Cita_Cita1`
-    FOREIGN KEY (`Cita_idCita`)
-    REFERENCES `codecut_DB`.`Cita` (`idCita`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Servicios_has_Cita_Empleado1`
-    FOREIGN KEY (`Empleado_idEmpleado`)
-    REFERENCES `codecut_DB`.`Empleado` (`idEmpleado`)
+  CONSTRAINT `fk_appointment_has_services_employee1`
+    FOREIGN KEY (`employee_idEmployee`)
+    REFERENCES `codecut_DB`.`employee` (`idEmployee`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
