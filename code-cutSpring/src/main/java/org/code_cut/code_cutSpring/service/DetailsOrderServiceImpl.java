@@ -39,6 +39,6 @@ public class DetailsOrderServiceImpl implements DetailsOrderService {
 
     @Override
     public List<DetailsOrder> findByPedidoId(Long idOrder) {
-        return detailsOrderRepository.findByOrderid(idOrder);
+        return detailsOrderRepository.findByOrder_id(idOrder);
     }
 }
