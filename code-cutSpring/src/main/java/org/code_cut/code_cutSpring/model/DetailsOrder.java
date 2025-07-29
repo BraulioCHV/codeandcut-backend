@@ -26,6 +26,6 @@ public class DetailsOrder {
 
     // Relación One-to-One con Producto
     @OneToOne
-    @JoinColumn(name = "products_idProducts", nullable = false)
+    @JoinColumn(name = "products_idproducts", nullable = false)
     private Products product;
 }

@@ -4,12 +4,12 @@ import org.code_cut.code_cutSpring.model.Service;
 import org.code_cut.code_cutSpring.repository.ServiceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@org.springframework.stereotype.Service
 public class ServiceServiceImpl implements ServiceService {
 
     @Autowired

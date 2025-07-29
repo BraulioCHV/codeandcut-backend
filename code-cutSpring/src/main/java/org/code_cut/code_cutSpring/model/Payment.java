@@ -1,5 +1,6 @@
 package org.code_cut.code_cutSpring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,5 +22,10 @@ public class Payment {
     private int typepayment;
     @Column(nullable = false)
     private String status;
-
+    @OneToOne
+//llave foranea
+    @JoinColumn(name = "order_idOrder",nullable = false)
+//evitar ciclo infinito
+    @JsonIgnore
+    private Orders orders;
 }

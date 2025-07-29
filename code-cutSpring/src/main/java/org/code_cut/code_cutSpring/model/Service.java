@@ -1,6 +1,6 @@
 package org.code_cut.code_cutSpring.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "services")
