@@ -7,7 +7,7 @@ import java.util.List;
 public interface PaymentService {
     List<Payment> getAllPayment();
     Payment getPaymentById(int id);
-    Payment deletePaymentBtId(int id);
+    Payment deletePaymentById(int id);
     Payment addPayment(Payment payment);
     Payment updatePaymentById(int id, Payment paymentUpdate);
 }

@@ -3,11 +3,12 @@ package org.code_cut.code_cutSpring.service;
 import org.code_cut.code_cutSpring.model.Payment;
 import org.code_cut.code_cutSpring.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
-public class PaymentServiceImpl {
+@Service
+public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
 
     @Autowired
@@ -17,6 +18,7 @@ public class PaymentServiceImpl {
 
     @Override
     public List<Payment> getAllPayment() {
+
         return paymentRepository.findAll();
     }
 
@@ -28,7 +30,7 @@ public class PaymentServiceImpl {
     }
 
     @Override
-    public Payment deletePaymentBtId(int id) {
+    public Payment deletePaymentById(int id) {
         //Crear una varariable temporal para guardar el producto eliminado
         Payment temp = null;
         //Usamos early return para evaluar si no existe el producto, en caso de que no exista, termina la ejecución en ese momento
