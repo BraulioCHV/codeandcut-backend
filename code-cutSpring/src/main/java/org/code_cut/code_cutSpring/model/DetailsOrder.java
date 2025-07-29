@@ -14,17 +14,17 @@ public class DetailsOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDetailsOrder")
-    private Long idDetailsOrder;
+    private Long id;
 
     @Column(name = "qtyProduct", nullable = false)
     private int qtyProduct;
 
-    // Relación Many-to-One con Pedido
+    // Relación One-to-One con Pedido
     @OneToOne
-    @JoinColumn(name = "order_idOrder", nullable = false)
-    private Order order;
+    @JoinColumn(name = "order_id", nullable = false)
+    private Orders order;
 
-    // Relación Many-to-One con Producto
+    // Relación One-to-One con Producto
     @OneToOne
     @JoinColumn(name = "products_idProducts", nullable = false)
     private Products product;
