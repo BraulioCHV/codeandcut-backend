@@ -21,11 +21,11 @@ public class DetailsOrder {
 
     // Relación Many-to-One con Pedido
     @OneToOne
-    @JoinColumn(name = "order_idOrder", nullable = false)
+    @JoinColumn(name = "order_idorder", nullable = false)
     private Orders order;
 
     // Relación Many-to-One con Producto
     @OneToOne
-    @JoinColumn(name = "products_idProducts", nullable = false)
+    @JoinColumn(name = "products_idproducts", nullable = false)
     private Products product;
 }

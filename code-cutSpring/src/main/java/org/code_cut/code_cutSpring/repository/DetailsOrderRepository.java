@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface DetailsOrderRepository extends JpaRepository<DetailsOrder, Long> {
-    List<DetailsOrder>findByOrderid(Long idOrder);
+    List<DetailsOrder> findByOrderid(Long idOrder);
 
 }
