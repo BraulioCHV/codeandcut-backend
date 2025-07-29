@@ -53,9 +53,8 @@ public class PaymentServiceImpl implements PaymentService {
         Optional<Payment> optionalPayment = paymentRepository.findById(id);
         if(optionalPayment.isEmpty()) throw new IllegalArgumentException("El pago con el id "+id+" no existe");
         Payment originalPayment = optionalPayment.get();
-        if(paymentUpdate.getTypePayment() != 0) originalPayment.setTypePayment(paymentUpdate.getTypePayment());
+        if(paymentUpdate.getTypepayment() != 0) originalPayment.setTypepayment(paymentUpdate.getTypepayment());
         if(paymentUpdate.getStatus() != null) originalPayment.setStatus(paymentUpdate.getStatus());
-        if(paymentUpdate.getStock() != 0) originalPayment.setStock(paymentUpdate.getStock());
         return paymentRepository.save(originalPayment);
     }
 }

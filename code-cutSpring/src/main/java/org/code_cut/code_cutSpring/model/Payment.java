@@ -17,10 +17,9 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idpayment")
     private int id;
-    @Column(nullable = false)
-    private int typePayment;
+    @Column( nullable = false)
+    private int typepayment;
     @Column(nullable = false)
     private String status;
-    @Column(nullable = false)
-    private int stock;
+
 }
