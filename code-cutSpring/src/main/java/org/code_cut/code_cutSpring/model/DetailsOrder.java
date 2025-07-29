@@ -21,7 +21,7 @@ public class DetailsOrder {
 
     // Relación One-to-One con Pedido
     @OneToOne
-    @JoinColumn(name = "order_id", nullable = false)
+    @JoinColumn(name = "order_idorder", nullable = false)
     private Orders order;
 
     // Relación One-to-One con Producto
