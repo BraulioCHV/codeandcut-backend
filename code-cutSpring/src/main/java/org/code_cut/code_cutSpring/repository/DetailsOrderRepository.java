@@ -1,4 +1,11 @@
 package org.code_cut.code_cutSpring.repository;
 
-public interface DetailsOrderRepository {
+import org.code_cut.code_cutSpring.model.DetailsOrder;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface DetailsOrderRepository extends JpaRepository<DetailsOrder> {
+    List<DetailsOrder>findByOrderid(Long idOrder);
+
 }
