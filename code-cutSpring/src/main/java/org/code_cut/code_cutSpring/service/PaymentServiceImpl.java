@@ -1,15 +1,14 @@
 package org.code_cut.code_cutSpring.service;
 
 import org.code_cut.code_cutSpring.model.Payment;
-import org.code_cut.code_cutSpring.model.Products;
-import org.code_cut.code_cutSpring.repository.ProductsRepository;
+import org.code_cut.code_cutSpring.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
 
 public class PaymentServiceImpl {
-    private final PaymentRepository productsRepository;
+    private final PaymentRepository paymentRepository;
 
     @Autowired
     public PaymentServiceImpl(PaymentRepository paymentRepository) {
