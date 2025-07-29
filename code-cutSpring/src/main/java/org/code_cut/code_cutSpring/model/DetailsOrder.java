@@ -22,7 +22,7 @@ public class DetailsOrder {
     // Relación Many-to-One con Pedido
     @OneToOne
     @JoinColumn(name = "order_idOrder", nullable = false)
-    private Order order;
+    private Orders order;
 
     // Relación Many-to-One con Producto
     @OneToOne
