@@ -1,4 +1,7 @@
 package org.code_cut.code_cutSpring.repository;
 
-public interface PaymentRepository {
+import org.code_cut.code_cutSpring.model.Payment;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PaymentRepository extends JpaRepository<Payment, Integer> {
 }
