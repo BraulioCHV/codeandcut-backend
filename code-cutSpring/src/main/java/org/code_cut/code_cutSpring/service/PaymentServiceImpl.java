@@ -1,19 +1,21 @@
 package org.code_cut.code_cutSpring.service;
-
+import org.code_cut.code_cutSpring.dto.PaymentRequest;
+import org.code_cut.code_cutSpring.model.Orders;
 import org.code_cut.code_cutSpring.model.Payment;
+import org.code_cut.code_cutSpring.repository.OrdersRepository;
 import org.code_cut.code_cutSpring.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 @Service
 public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
-
+    private final OrdersRepository ordersRepository;
     @Autowired
-    public PaymentServiceImpl(PaymentRepository paymentRepository) {
+    public PaymentServiceImpl(PaymentRepository paymentRepository, OrdersRepository ordersRepository) {
         this.paymentRepository = paymentRepository;
+        this.ordersRepository = ordersRepository;
     }
 
     @Override
@@ -56,5 +58,17 @@ public class PaymentServiceImpl implements PaymentService {
         if(paymentUpdate.getTypepayment() != 0) originalPayment.setTypepayment(paymentUpdate.getTypepayment());
         if(paymentUpdate.getStatus() != null) originalPayment.setStatus(paymentUpdate.getStatus());
         return paymentRepository.save(originalPayment);
+    }
+    @Override
+    public Payment addPaymentToOrder(Long orderId, PaymentRequest paymentRequest) {
+        Orders order = ordersRepository.findById(orderId)
+                .orElseThrow(() -> new IllegalArgumentException("La orden con ID " + orderId + " no existe"));
+
+        Payment payment = new Payment();
+        payment.setTypepayment(paymentRequest.getTypePayment());
+        payment.setStatus(paymentRequest.getStatus());
+        payment.setOrders(order);
+
+        return paymentRepository.save(payment);
     }
 }
