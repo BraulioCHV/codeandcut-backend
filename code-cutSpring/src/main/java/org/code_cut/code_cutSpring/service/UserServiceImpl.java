@@ -34,18 +34,10 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("El usuario con ID " + id + " no existe."));
 
-        if (userDetails.getName() != null) {
-            user.setName(userDetails.getName());
-        }
-        if (userDetails.getLastName() != null) {
-            user.setLastName(userDetails.getLastName());
-        }
-        if (userDetails.getEmail() != null) {
-            user.setEmail(userDetails.getEmail());
-        }
-        if (userDetails.getPassword() != null) {
-            user.setPassword(userDetails.getPassword());
-        }
+        if (userDetails.getName() != null) user.setName(userDetails.getName());
+        if (userDetails.getLastName() != null) user.setLastName(userDetails.getLastName());
+        if (userDetails.getEmail() != null) user.setEmail(userDetails.getEmail());
+        if (userDetails.getPassword() != null) user.setPassword(userDetails.getPassword());
 
         return userRepository.save(user);
     }
