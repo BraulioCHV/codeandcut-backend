@@ -12,8 +12,8 @@ public class DetailsOrderServiceImpl implements DetailsOrderService {
     private final DetailsOrderRepository detailsOrderRepository;
 
     @Autowired
-    public DetailsOrderServiceImpl(DetailsOrderRepository detalleOrdenRepository) {
-        this.detailsOrderRepository = detalleOrdenRepository;
+    public DetailsOrderServiceImpl(DetailsOrderRepository detailsOrderRepository) {
+        this.detailsOrderRepository = detailsOrderRepository;
     }
 
     @Override
@@ -23,22 +23,22 @@ public class DetailsOrderServiceImpl implements DetailsOrderService {
 
     @Override
     public DetailsOrder findById(Long id) {
-        return detailsOrderRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Detalle de orden no encontrado con ID: " + id));
+        return detailsOrderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Detalle de orden no encontrado con ID: " + id));
     }
 
     @Override
     public DetailsOrder save(DetailsOrder detailsOrder) {
-        return (DetailsOrder) detailsOrderRepository.save(detailsOrder);
+        return detailsOrderRepository.save(detailsOrder);
     }
 
     @Override
     public void deleteById(Long id) {
         detailsOrderRepository.deleteById(id);
     }
-
+/*
     @Override
-    public List<DetailsOrder> findByPedidoId(Long idOrder) {
-        return detailsOrderRepository.findByOrderid(idOrder);
-    }
+    public List<DetailsOrder> findByOrderId(Long orderId) {
+        return detailsOrderRepository.findByOrder_Id(orderId);
+    }*/
 }
