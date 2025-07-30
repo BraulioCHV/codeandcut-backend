@@ -1,50 +1,42 @@
 package org.code_cut.code_cutSpring.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import lombok.AllArgsConstructor;
 import org.code_cut.code_cutSpring.model.Service;
 import org.code_cut.code_cutSpring.service.ServiceService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/services")
+@RequestMapping(path = "/api/services")
+@AllArgsConstructor
 public class ServiceController {
 
-    @Autowired
-    private ServiceService serviceService;
+    private final ServiceService serviceService;
 
-    @GetMapping
+    @GetMapping // http://localhost:8080/api/services
     public List<Service> getAllServices() {
-        return serviceService.getAllServices();
+        return this.serviceService.getAllServices();
     }
 
-    @PostMapping
+    @GetMapping(path = "{id}") // http://localhost:8080/api/services/{id}
+    public Service getServiceById(@PathVariable("id") Long id) {
+        return this.serviceService.getServiceById(id)
+                .orElseThrow(() -> new RuntimeException("Servicio no encontrado con id: " + id));
+    }
+
+    @PostMapping // http://localhost:8080/api/services
     public Service createService(@RequestBody Service service) {
-        return serviceService.createService(service);
+        return this.serviceService.createService(service);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Service> getServiceById(@PathVariable Long id) {
-        return serviceService.getServiceById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @PutMapping(path = "{id}") // http://localhost:8080/api/services/{id}
+    public Service updateService(@PathVariable("id") Long id, @RequestBody Service serviceDetails) {
+        return this.serviceService.updateService(id, serviceDetails);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Service> updateService(@PathVariable Long id, @RequestBody Service serviceDetails) {
-        try {
-            Service updatedService = serviceService.updateService(id, serviceDetails);
-            return ResponseEntity.ok(updatedService);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteService(@PathVariable Long id) {
-        serviceService.deleteService(id);
-        return ResponseEntity.ok().<Void>build();
+    @DeleteMapping(path = "{id}") // http://localhost:8080/api/services/{id}
+    public void deleteService(@PathVariable("id") Long id) {
+        this.serviceService.deleteService(id);
     }
 }
