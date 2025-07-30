@@ -24,7 +24,7 @@ public class DetailsOrderController {
     }
 
     @GetMapping("/Order/{idOrder}")
-    public List<DetailsOrder> getByPedidoId(@PathVariable Long pedidoId) {
-        return detailsOrderService.findByPedidoId(pedidoId);
+    public List<DetailsOrder> getByOrderId(@PathVariable Long OrderId) {
+        return detailsOrderService.findByOrderId(OrderId);
     }
 }
