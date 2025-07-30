@@ -38,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee updateEmployeeById(Long id, Employee employeeUpdate) {
         Employee existing = getEmployeeById(id);
         existing.setName(employeeUpdate.getName());
-        existing.setLastName(employeeUpdate.getLastName());
+        existing.setLastname(employeeUpdate.getLastname());
         existing.setAge(employeeUpdate.getAge());
         return employeeRepository.save(existing);
     }

@@ -1,5 +1,6 @@
 package org.code_cut.code_cutSpring.service;
 
+import org.code_cut.code_cutSpring.dto.OrderRequest;
 import org.code_cut.code_cutSpring.model.User;
 import org.code_cut.code_cutSpring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,10 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("El usuario con ID " + id + " no existe.");
         }
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public User addOrders(int id, OrderRequest orderRequest) {
+        return null;//vamos orlando tu puedes let's do it
     }
 }

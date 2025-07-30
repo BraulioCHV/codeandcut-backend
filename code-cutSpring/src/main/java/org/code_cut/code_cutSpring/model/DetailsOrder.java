@@ -18,7 +18,7 @@ public class DetailsOrder {
 
     @Column(name = "qtyProduct", nullable = false)
     private int qtyProduct;
-
+/*
     // Relación One-to-One con Pedido
     @OneToOne
     @JoinColumn(name = "order_idorder", nullable = false)
@@ -28,4 +28,6 @@ public class DetailsOrder {
     @OneToOne
     @JoinColumn(name = "products_idproducts", nullable = false)
     private Products product;
+
+ */
 }

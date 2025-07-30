@@ -22,10 +22,14 @@ public class Payment {
     private int typepayment;
     @Column(nullable = false)
     private String status;
-    @OneToOne
+
+
 //llave foranea
-    @JoinColumn(name = "order_idorder",nullable = false)
+    @OneToOne
+    @JoinColumn(name = "orders_idorder", nullable = false)
 //evitar ciclo infinito
     @JsonIgnore
     private Orders orders;
+
+
 }
