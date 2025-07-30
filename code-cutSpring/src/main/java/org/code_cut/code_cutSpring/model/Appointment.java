@@ -1,31 +1,34 @@
 package org.code_cut.code_cutSpring.model;
 
-
 import jakarta.persistence.*;
-        import java.time.LocalDateTime;
-import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "appoitment")
-
-public class Appoitment {
+@Table (name="appointment")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCita;
+    @Column(name = "idAppointment")
+    private Long id;
 
-    @Column(name = "FechaHora", nullable = false)
-    private LocalDateTime fechaHora;
+    @Column  (name = "DateHour", nullable = false)
+    private LocalDateTime dateHour;
 
-    @Column(name = "Status", length = 45)
+    @Column(name = "Status", nullable = false, length = 45)
     private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Usuario_idUsuario", nullable = false)
-    private User usuario; // Asumiendo que tu clase de usuario se llama User
+//    @ManyToOne(fetch = FetchType.LAZY)
+//  @JoinColumn(name = "user_idUser", nullable = false)
+//  @Column
+    //  private User user;
 
-    @OneToMany(mappedBy = "cita", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ServicioCita> serviciosCita;
-
-    // Getters y Setters
 }
