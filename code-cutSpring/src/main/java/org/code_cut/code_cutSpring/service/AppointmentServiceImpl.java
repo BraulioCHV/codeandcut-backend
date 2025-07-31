@@ -1,6 +1,8 @@
 package org.code_cut.code_cutSpring.service;
 
 import org.code_cut.code_cutSpring.model.Appointment;
+import org.code_cut.code_cutSpring.model.Employee;
+import org.code_cut.code_cutSpring.model.Services;
 import org.code_cut.code_cutSpring.repository.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,5 +61,10 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public void deleteAppointment(Long id) {
         appointmentRepository.deleteById(id);
+    }
+
+    @Override
+    public Appointment addServiceAndEmployee(Long id, Services serivce, Employee employee) {
+        return null; //Implementar logica
     }
 }

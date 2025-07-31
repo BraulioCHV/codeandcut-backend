@@ -1,5 +1,6 @@
 package org.code_cut.code_cutSpring.service;
 
+import org.code_cut.code_cutSpring.dto.AppointmentRequest;
 import org.code_cut.code_cutSpring.dto.OrderRequest;
 import org.code_cut.code_cutSpring.model.User;
 import org.code_cut.code_cutSpring.repository.UserRepository;
@@ -53,6 +54,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addOrders(int id, OrderRequest orderRequest) {
+
         return null;//vamos orlando tu puedes let's do it
+    }
+
+    @Override
+    public User addAppointment(int id, AppointmentRequest appointmentRequest) {
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package org.code_cut.code_cutSpring.service;
 
+import org.code_cut.code_cutSpring.dto.DetailsOrderRequest;
 import org.code_cut.code_cutSpring.model.Products;
 import org.code_cut.code_cutSpring.repository.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +59,10 @@ public class ProductsServiceImpl implements ProductsService {
         if(productUpdate.getStock() != 0) originalProduct.setStock(productUpdate.getStock());
         if(productUpdate.getPrice() != null) originalProduct.setPrice(productUpdate.getPrice());
         return productsRepository.save(originalProduct);
+    }
+
+    @Override
+    public Products addProductintoDetailOrders(int id, DetailsOrderRequest detailsOrderRequest) {
+        return null; //Llenar logica
     }
 }
