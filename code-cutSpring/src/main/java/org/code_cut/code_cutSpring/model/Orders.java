@@ -8,8 +8,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
-@Table(name = "order")
+@Table(name = "`order`")
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -27,6 +29,7 @@ public class Orders {
     @Column(name = "totalamount", nullable = false)
     private Double totalAmount;
 
+    /*
     //Realcion tablas
     @ManyToOne
     @JoinColumn(name = "user_iduser", nullable = false)
@@ -38,6 +41,6 @@ public class Orders {
     //Evitar ciclo infinito
     @JsonIgnore
     private Payment payment;
-
+*/
 
 }
