@@ -1,7 +1,13 @@
 package org.code_cut.code_cutSpring.service;
 
+import org.code_cut.code_cutSpring.dto.PaymentRequest;
+import org.code_cut.code_cutSpring.dto.UserRequest;
 import org.code_cut.code_cutSpring.model.Orders;
+import org.code_cut.code_cutSpring.model.Payment;
+import org.code_cut.code_cutSpring.model.User;
 import org.code_cut.code_cutSpring.repository.OrdersRepository;
+import org.code_cut.code_cutSpring.repository.PaymentRepository;
+import org.code_cut.code_cutSpring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +18,15 @@ import java.util.Optional;
 public class OrdersServiceImpl implements OrdersService{
 
     private final OrdersRepository ordersRepository;
-
+    private final PaymentRepository paymentRepository;
+    private final UserRepository userRepository;
     //Inyección dependencias
     @Autowired
-    public OrdersServiceImpl(OrdersRepository ordersRepository) {this.ordersRepository = ordersRepository;}
+    public OrdersServiceImpl(OrdersRepository ordersRepository, PaymentRepository paymentRepository, UserRepository userRepository) {
+        this.ordersRepository = ordersRepository;
+        this.paymentRepository = paymentRepository;
+        this.userRepository = userRepository;
+    }
 
     @Override
     public List<Orders> getAllOrders() {
@@ -64,4 +75,32 @@ public class OrdersServiceImpl implements OrdersService{
 
         return ordersRepository.save(originalOrder);
     }
+
+    @Override
+    public Orders addOrderToPayment(Long orderId, PaymentRequest paymentRequest) {
+        Orders order = ordersRepository.findById(orderId)
+                .orElseThrow(() -> new IllegalArgumentException("La orden con ID " + orderId + " no existe"));
+
+        Payment payment = new Payment();
+        payment.setTypepayment(paymentRequest.getTypePayment());
+        payment.setStatus(paymentRequest.getStatus());
+        payment.setOrders(order);
+
+        paymentRepository.save(payment);
+        return order;
+       // return PaymentRepository.save(payment);
+    }
+
+    @Override
+    public Orders addUserToOrder(Long orderId, int userId){
+        Orders order = ordersRepository.findById(orderId)
+                .orElseThrow(() -> new IllegalArgumentException("La orden con ID " + orderId + " no existe"));
+        User user = userRepository.findById( userId)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario con id "+userId+" no encontrado"));
+
+        order.setUser(user);
+
+        return ordersRepository.save(order);
+    }
+
 }
