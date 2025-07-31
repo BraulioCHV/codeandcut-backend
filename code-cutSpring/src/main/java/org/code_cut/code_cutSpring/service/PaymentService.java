@@ -11,5 +11,5 @@ public interface PaymentService {
     Payment deletePaymentById(int id);
     Payment addPayment(Payment payment);
     Payment updatePaymentById(int id, Payment paymentUpdate);
-    Payment addPaymentToOrder(Long orderId, PaymentRequest paymentRequest);
+    //Payment addPaymentToOrder(Long orderId, PaymentRequest paymentRequest);
 }

@@ -1,5 +1,7 @@
 package org.code_cut.code_cutSpring.service;
 
+import org.code_cut.code_cutSpring.dto.AppointmentRequest;
+import org.code_cut.code_cutSpring.dto.OrderRequest;
 import org.code_cut.code_cutSpring.model.User;
 import org.code_cut.code_cutSpring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,18 +36,10 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("El usuario con ID " + id + " no existe."));
 
-        if (userDetails.getName() != null) {
-            user.setName(userDetails.getName());
-        }
-        if (userDetails.getLastName() != null) {
-            user.setLastName(userDetails.getLastName());
-        }
-        if (userDetails.getEmail() != null) {
-            user.setEmail(userDetails.getEmail());
-        }
-        if (userDetails.getPassword() != null) {
-            user.setPassword(userDetails.getPassword());
-        }
+        if (userDetails.getName() != null) user.setName(userDetails.getName());
+        if (userDetails.getLastName() != null) user.setLastName(userDetails.getLastName());
+        if (userDetails.getEmail() != null) user.setEmail(userDetails.getEmail());
+        if (userDetails.getPassword() != null) user.setPassword(userDetails.getPassword());
 
         return userRepository.save(user);
     }
@@ -56,5 +50,16 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("El usuario con ID " + id + " no existe.");
         }
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public User addOrders(int id, OrderRequest orderRequest) {
+
+        return null;//vamos orlando tu puedes let's do it
+    }
+
+    @Override
+    public User addAppointment(int id, AppointmentRequest appointmentRequest) {
+        return null;
     }
 }

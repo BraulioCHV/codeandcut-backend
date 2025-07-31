@@ -1,13 +1,14 @@
 package org.code_cut.code_cutSpring.service;
 
-import org.code_cut.code_cutSpring.model.Service;
+import org.code_cut.code_cutSpring.model.Services;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ServiceService {
-    List<Service> getAllServices();
-    Service getServiceById(Long id);
-    Service addService(Service service);
-    Service updateService(Long id, Service serviceUpdate);
-    Service deleteServiceById(Long id);
+    List<Services> getAllServices();
+    Optional<Services> getServiceById(Long id);
+    Services createService(Services services);
+    Services updateService(Long id, Services servicesDetails);
+    void deleteService(Long id);
 }
