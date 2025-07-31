@@ -3,6 +3,8 @@ package org.code_cut.code_cutSpring.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "`user`")
 @Getter
@@ -13,7 +15,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idUser")
+    @Column(name = "iduser")
     private int idUser;
 
     @Column(length = 85, nullable = false)
@@ -27,4 +29,8 @@ public class User {
 
     @Column(length = 45, nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List <Orders>orders;
 }
+

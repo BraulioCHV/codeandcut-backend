@@ -8,5 +8,5 @@ public interface DetailsOrderService {
     DetailsOrder findById(Long id);
     DetailsOrder save(DetailsOrder detailsOrder);
     void deleteById(Long id);
-    List<DetailsOrder> findByOrderId(Long orderId);
+  //  List<DetailsOrder> findByOrderId(Long orderId);
 }

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "order")
+@Table(name = "`order`")
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -18,7 +18,7 @@ public class Orders {
     //Id autoincrementable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_order")
+    @Column(name = "idorder")
     private long id;
     //Columna address
     @Column(nullable = false)
@@ -33,8 +33,9 @@ public class Orders {
     //Evitar ciclo infinito
     @JsonIgnore
     private User user;
-    @OneToOne
-    @JoinColumn(name = "payment_idpayment", nullable = false)
+
+   @OneToOne(mappedBy = "orders",cascade = CascadeType.ALL,orphanRemoval = true)
+
     //Evitar ciclo infinito
     @JsonIgnore
     private Payment payment;

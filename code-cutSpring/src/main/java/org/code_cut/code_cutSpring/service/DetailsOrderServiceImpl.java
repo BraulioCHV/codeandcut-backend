@@ -36,9 +36,9 @@ public class DetailsOrderServiceImpl implements DetailsOrderService {
     public void deleteById(Long id) {
         detailsOrderRepository.deleteById(id);
     }
-
+/*
     @Override
     public List<DetailsOrder> findByOrderId(Long orderId) {
         return detailsOrderRepository.findByOrder_Id(orderId);
-    }
+    }*/
 }

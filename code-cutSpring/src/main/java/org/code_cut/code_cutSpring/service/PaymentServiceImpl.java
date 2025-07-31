@@ -59,6 +59,7 @@ public class PaymentServiceImpl implements PaymentService {
         if(paymentUpdate.getStatus() != null) originalPayment.setStatus(paymentUpdate.getStatus());
         return paymentRepository.save(originalPayment);
     }
+/*
     @Override
     public Payment addPaymentToOrder(Long orderId, PaymentRequest paymentRequest) {
         Orders order = ordersRepository.findById(orderId)
@@ -70,5 +71,11 @@ public class PaymentServiceImpl implements PaymentService {
         payment.setOrders(order);
 
         return paymentRepository.save(payment);
+        *
+         return null;
     }
+
+ */
+
+
 }

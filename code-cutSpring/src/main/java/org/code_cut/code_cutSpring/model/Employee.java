@@ -20,11 +20,11 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idEmployee", unique = true, nullable = false)
-    private Long idEmployee;
+    private Long idemployee;
     @Column(nullable = false, name = "name")
     private String name;
     @Column(nullable = false, name="last_name")
-    private String lastName;
+    private String lastname;
     @Column(nullable = false, name = "age")
     private Integer age;
 

@@ -8,5 +8,6 @@ import lombok.Setter;
 public class PaymentRequest {
     private int typePayment;
     private String status;
+    private Long orderId;
 }
 
