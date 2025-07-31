@@ -28,7 +28,7 @@ import lombok.Setter;
 
         //Relacion muchos a uno
         @ManyToOne
-        @JoinColumn(name = "detailsorder_iddetailsorder", nullable = false)
+        @JoinColumn(name = "detailsorder_iddetailsorder", nullable = true)
         private DetailsOrder detailsOrder;
 
 }
