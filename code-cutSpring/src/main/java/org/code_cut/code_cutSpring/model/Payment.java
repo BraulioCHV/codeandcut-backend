@@ -24,7 +24,7 @@ public class Payment {
     private String status;
 
 
-//llave foranea
+//llave foranea - uno a uno - Orders
     @OneToOne
     @JoinColumn(name = "orders_idorder", nullable = false)
 //evitar ciclo infinito

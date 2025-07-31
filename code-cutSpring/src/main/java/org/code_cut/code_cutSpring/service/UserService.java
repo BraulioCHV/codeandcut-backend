@@ -1,5 +1,6 @@
 package org.code_cut.code_cutSpring.service;
 
+import org.code_cut.code_cutSpring.dto.AppointmentRequest;
 import org.code_cut.code_cutSpring.dto.OrderRequest;
 import org.code_cut.code_cutSpring.model.User;
 
@@ -12,4 +13,5 @@ public interface UserService {
     User updateUser(int id, User user);
     void deleteUser(int id);
     User addOrders(int id, OrderRequest orderRequest);
+    User addAppointment(int id, AppointmentRequest appointmentRequest);
 }

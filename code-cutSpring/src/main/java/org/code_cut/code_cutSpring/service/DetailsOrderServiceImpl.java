@@ -1,6 +1,7 @@
 package org.code_cut.code_cutSpring.service;
 
 import org.code_cut.code_cutSpring.model.DetailsOrder;
+import org.code_cut.code_cutSpring.model.Orders;
 import org.code_cut.code_cutSpring.repository.DetailsOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,12 @@ public class DetailsOrderServiceImpl implements DetailsOrderService {
     public void deleteById(Long id) {
         detailsOrderRepository.deleteById(id);
     }
-/*
+
+    @Override
+    public DetailsOrder addDetailIntoOrder(Long id, Orders order) {
+        return null; //Llenar logica
+    }
+    /*
     @Override
     public List<DetailsOrder> findByOrderId(Long orderId) {
         return detailsOrderRepository.findByOrder_Id(orderId);

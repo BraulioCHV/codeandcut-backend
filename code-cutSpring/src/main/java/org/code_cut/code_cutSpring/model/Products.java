@@ -25,4 +25,10 @@ import lombok.Setter;
         private String description;
         @Column(nullable = false)
         private int stock;
+
+        //Relacion muchos a uno
+        @ManyToOne
+        @JoinColumn(name = "detailsorder_iddetailsorder", nullable = false)
+        private DetailsOrder detailsOrder;
+
 }
