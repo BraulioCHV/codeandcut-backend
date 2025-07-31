@@ -1,6 +1,7 @@
 package org.code_cut.code_cutSpring.service;
 
 import org.code_cut.code_cutSpring.model.DetailsOrder;
+import org.code_cut.code_cutSpring.model.Orders;
 import org.code_cut.code_cutSpring.repository.DetailsOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,8 +13,8 @@ public class DetailsOrderServiceImpl implements DetailsOrderService {
     private final DetailsOrderRepository detailsOrderRepository;
 
     @Autowired
-    public DetailsOrderServiceImpl(DetailsOrderRepository detalleOrdenRepository) {
-        this.detailsOrderRepository = detalleOrdenRepository;
+    public DetailsOrderServiceImpl(DetailsOrderRepository detailsOrderRepository) {
+        this.detailsOrderRepository = detailsOrderRepository;
     }
 
     @Override
@@ -23,13 +24,13 @@ public class DetailsOrderServiceImpl implements DetailsOrderService {
 
     @Override
     public DetailsOrder findById(Long id) {
-        return detailsOrderRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Detalle de orden no encontrado con ID: " + id));
+        return detailsOrderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Detalle de orden no encontrado con ID: " + id));
     }
 
     @Override
     public DetailsOrder save(DetailsOrder detailsOrder) {
-        return (DetailsOrder) detailsOrderRepository.save(detailsOrder);
+        return detailsOrderRepository.save(detailsOrder);
     }
 
     @Override
@@ -38,7 +39,12 @@ public class DetailsOrderServiceImpl implements DetailsOrderService {
     }
 
     @Override
-    public List<DetailsOrder> findByPedidoId(Long idOrder) {
-        return detailsOrderRepository.findByOrder_Id(idOrder);
+    public DetailsOrder addDetailIntoOrder(Long id, Orders order) {
+        return null; //Llenar logica
     }
+    /*
+    @Override
+    public List<DetailsOrder> findByOrderId(Long orderId) {
+        return detailsOrderRepository.findByOrder_Id(orderId);
+    }*/
 }

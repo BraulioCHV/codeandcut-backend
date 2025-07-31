@@ -1,6 +1,6 @@
 package org.code_cut.code_cutSpring.service;
 
-import org.code_cut.code_cutSpring.model.Service;
+import org.code_cut.code_cutSpring.model.Services;
 import org.code_cut.code_cutSpring.repository.ServiceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,28 +16,28 @@ public class ServiceServiceImpl implements ServiceService {
     private ServiceRepository serviceRepository;
 
     @Override
-    public List<Service> getAllServices() {
+    public List<Services> getAllServices() {
         return serviceRepository.findAll();
     }
 
     @Override
-    public Optional<Service> getServiceById(Long id) {
+    public Optional<Services> getServiceById(Long id) {
         return serviceRepository.findById(id);
     }
 
     @Override
-    public Service createService(Service service) {
-        return serviceRepository.save(service);
+    public Services createService(Services services) {
+        return serviceRepository.save(services);
     }
 
     @Override
-    public Service updateService(Long id, Service serviceDetails) {
+    public Services updateService(Long id, Services servicesDetails) {
         return serviceRepository.findById(id)
-                .map(service -> {
-                    service.setName(serviceDetails.getName());
-                    service.setDescription(serviceDetails.getDescription());
-                    service.setPrice(serviceDetails.getPrice());
-                    return serviceRepository.save(service);
+                .map(services -> {
+                    services.setName(servicesDetails.getName());
+                    services.setDescription(servicesDetails.getDescription());
+                    services.setPrice(servicesDetails.getPrice());
+                    return serviceRepository.save(services);
                 }).orElseThrow(() -> new RuntimeException("Service not found"));
     }
 

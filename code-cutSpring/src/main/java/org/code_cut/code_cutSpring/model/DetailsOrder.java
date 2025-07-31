@@ -1,9 +1,12 @@
 package org.code_cut.code_cutSpring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -13,19 +16,22 @@ import lombok.NoArgsConstructor;
 public class DetailsOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idDetailsOrder")
+    @Column(name = "iddetailsorder")
     private Long id;
 
-    @Column(name = "qtyProduct", nullable = false)
+    @Column(name = "qtyproduct", nullable = false)
     private int qtyProduct;
 
-    // Relación One-to-One con Pedido
+    // Relación One-to-One con Orders
     @OneToOne
-    @JoinColumn(name = "order_idorder", nullable = false)
-    private Orders order;
+    @JoinColumn(name = "orders_idorder", nullable = false)
+    @JsonIgnore
+    private Orders orders;
 
-    // Relación One-to-One con Producto
-    @OneToOne
-    @JoinColumn(name = "products_idproducts", nullable = false)
-    private Products product;
+    // Relación muchos a uno con Producto
+    @OneToMany(mappedBy = "detailsOrder", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Products> products;
+
+
+
 }
