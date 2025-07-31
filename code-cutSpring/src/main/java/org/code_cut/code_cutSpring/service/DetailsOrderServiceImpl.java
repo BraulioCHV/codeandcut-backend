@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
-@Service // Marca esta clase como un componente de servicio de Spring
+@Service
 public class DetailsOrderServiceImpl implements DetailsOrderService {
 
     private final DetailsOrderRepository detailsOrderRepository;
@@ -25,7 +25,7 @@ public class DetailsOrderServiceImpl implements DetailsOrderService {
     @Override
     public DetailsOrder findById(Long id) {
         return detailsOrderRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Detalle de orden no encontrado con ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Detalle de orden con ID " + id + " no fue encontrado"));
     }
 
     @Override
@@ -40,11 +40,12 @@ public class DetailsOrderServiceImpl implements DetailsOrderService {
 
     @Override
     public DetailsOrder addDetailIntoOrder(Long id, Orders order) {
-        return null; //Llenar logica
+        DetailsOrder detail = detailsOrderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("El detalle de orden seleccionado con ID "+id+" no fue encontrado"));
+        if (order == null) {
+            throw new RuntimeException("La orden no puede estar vacía");
+        }
+        detail.setOrders(order);
+        return detailsOrderRepository.save(detail);
     }
-    /*
-    @Override
-    public List<DetailsOrder> findByOrderId(Long orderId) {
-        return detailsOrderRepository.findByOrder_Id(orderId);
-    }*/
 }
