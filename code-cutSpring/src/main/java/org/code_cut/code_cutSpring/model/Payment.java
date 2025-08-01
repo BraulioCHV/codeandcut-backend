@@ -26,7 +26,7 @@ public class Payment {
 
 //llave foranea - uno a uno - Orders
     @OneToOne
-    @JoinColumn(name = "orders_idorder", nullable = false)
+    @JoinColumn(name = "orders_idorder", nullable = true)
 //evitar ciclo infinito
     @JsonIgnore
     private Orders orders;

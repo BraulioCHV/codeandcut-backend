@@ -86,9 +86,12 @@ public class OrdersServiceImpl implements OrdersService{
         payment.setStatus(paymentRequest.getStatus());
         payment.setOrders(order);
 
+
         paymentRepository.save(payment);
-        return order;
-       // return PaymentRepository.save(payment);
+        order.setPayment(payment);
+        return ordersRepository.save(order);
+
+
     }
 
     @Override

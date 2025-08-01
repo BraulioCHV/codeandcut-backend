@@ -27,7 +27,10 @@ public class OrdersController {
 
     //Peticion post crear order
     @PostMapping
-    public Orders addOrder(@RequestBody Orders orders){ return this.ordersService.addOrder(orders);}
+    public Orders addOrder(@RequestBody Orders orders){
+        return this.ordersService.addOrder(orders);
+    }
+
 
     //Peticion delete
     @DeleteMapping(path = "{orderId}")
