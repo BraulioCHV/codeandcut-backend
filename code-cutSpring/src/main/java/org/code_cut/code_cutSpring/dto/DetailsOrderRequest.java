@@ -8,6 +8,4 @@ import lombok.Setter;
 public class DetailsOrderRequest {
     private Long idDetailsOrder;  // ID de DetailsOrder
     private int qtyProduct;  // Cantidad de productos
-    private Long orderId;  // ID del pedido relacionado (Orders)
-    private Long productId;  // ID del producto relacionado (Products)
 }
