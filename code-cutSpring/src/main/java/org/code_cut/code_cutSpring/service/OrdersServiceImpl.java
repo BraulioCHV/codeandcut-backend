@@ -84,7 +84,9 @@ public class OrdersServiceImpl implements OrdersService{
         Payment payment = new Payment();
         payment.setTypepayment(paymentRequest.getTypePayment());
         payment.setStatus(paymentRequest.getStatus());
+
         payment.setOrders(order);
+        order.setPayment(payment);
 
 
         paymentRepository.save(payment);
