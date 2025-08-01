@@ -51,10 +51,16 @@ public class OrdersController {
     }
     //Wiring to order to payment
     @PostMapping("/{orderid}/payment")
-    public ResponseEntity<Orders> addOrderToPayment(@PathVariable long id, @RequestBody PaymentRequest paymentRequest) {
+    public ResponseEntity<Orders> addOrderToPayment(@PathVariable("orderId") long id, @RequestBody PaymentRequest paymentRequest) {
         Orders order = ordersService.addOrderToPayment(id, paymentRequest);
         return ResponseEntity.ok(order);
     }
 
+    //Wiring to order to detiailsorder
+    @PostMapping("/{orderid}/detailsorder")
+    public ResponseEntity<Orders> addDetailsToOrder(@PathVariable("orderId") long id, @RequestBody DetailsOrderRequest detailsOrderRequest){
+        Orders order = ordersService.addDetailsToOrder(id, detailsOrderRequest);
+        return ResponseEntity.ok(order);
+    }
 
 }
