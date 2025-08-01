@@ -9,18 +9,20 @@ import org.code_cut.code_cutSpring.model.Services;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
 
 public interface AppointmentService {
 
     Appointment createAppointment(Appointment appointment);
-    Appointment updateAppointmentById(Long id, Appointment appointment);
-    void deleteAppointment(Long id);
-    Appointment addServiceAndEmployee(Long id, Services service, Employee employee);
 
+    Optional<Appointment> updateAppointmentById(Integer id, Appointment appointment);
 
+    void deleteAppointment(Integer id);
 
+    Appointment addServiceAndEmployee(Integer id, Services service, Employee employee);
 
+    Optional<Appointment> getAppointmentById(Integer id);
 
-    // Appointment createAppointment(AppointmentRequest request);
-    //void deleteAppointment(Long id);
+    List<Appointment> getAllAppointments();
 }

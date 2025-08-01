@@ -15,7 +15,6 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
 
-    // Inyección de dependencias
     @Autowired
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository) {
         this.appointmentRepository = appointmentRepository;
@@ -26,45 +25,71 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepository.save(appointment);
     }
 
+    // Métoodo agregado; bonsulta en la base de datos todas las citas y devuelve una lista con ellas.
     @Override
-    public List<Appointment> getAllAppointment() {
+    public List<Appointment> getAllAppointments() {
         return appointmentRepository.findAll();
     }
 
-    // Obtiene una cita por ID
+    // Métoodo agregado;  sirve para buscar una cita específica por su ID en tu base de datos y devolverla si existe
     @Override
-    public Appointment getAppointmentById(Long id) {
-        return appointmentRepository.findById(id).orElse(null);
+    public Optional<Appointment> getAppointmentById(Integer id) {
+        return appointmentRepository.findById(id);
     }
 
-    // Actualiza Cita con Id
+    //Guarda la cita actualizada en la base de datos.
     @Override
-    public Appointment updateAppointmentById(Long id, Appointment appointmentUpdated) {
+    public Optional<Appointment> updateAppointmentById(Integer id, Appointment appointmentUpdated) {
         Optional<Appointment> optionalAppointment = appointmentRepository.findById(id);
 
         if (optionalAppointment.isPresent()) {
             Appointment existingAppointment = optionalAppointment.get();
 
-            // Actualiza solo los campos que llegan no nulos
             if (appointmentUpdated.getDateHour() != null) {
                 existingAppointment.setDateHour(appointmentUpdated.getDateHour());
             }
             if (appointmentUpdated.getStatus() != null) {
                 existingAppointment.setStatus(appointmentUpdated.getStatus());
             }
+            // Puedes añadir lógica para actualizar el usuario si es necesario
+            if (appointmentUpdated.getUser() != null) {
+                existingAppointment.setUser(appointmentUpdated.getUser());
+            }
 
+            return Optional.of(appointmentRepository.save(existingAppointment));
+        }
+        return Optional.empty(); // Retorna Optional vacío
+    }
+
+    @Override
+    public void deleteAppointment(Integer id) {
+        // Usa `existsById` para verificar antes de eliminar
+        if (appointmentRepository.existsById(id)) {
+            appointmentRepository.deleteById(id);
+        }
+    }
+
+    // Lógica para agregar servicio y empleado
+    @Override
+
+    public Appointment addServiceAndEmployee(Integer id, Services service, Employee employee) {
+        Optional<Appointment> optionalAppointment = appointmentRepository.findById(id);
+
+        if (optionalAppointment.isPresent()) {
+            Appointment existingAppointment = optionalAppointment.get();
+
+            // Si el servicio y/o el empleado no son nulos, actualiza la cita.
+            // Asume que la entidad Appointment tiene campos para Employee y Services.
+            if (service != null) {
+                // existingAppointment.setServices(service);
+            }
+            if (employee != null) {
+                // existingAppointment.setEmployee(employee);
+            }
+
+            // Guarda la cita actualizada.
             return appointmentRepository.save(existingAppointment);
         }
-        return null;
-    }
-    // Elimina una cita por ID
-    @Override
-    public void deleteAppointment(Long id) {
-        appointmentRepository.deleteById(id);
-    }
-
-    @Override
-    public Appointment addServiceAndEmployee(Long id, Services serivce, Employee employee) {
-        return null; //Implementar logica
+        return null; // O lanza una excepción si la cita no se encuentra
     }
 }

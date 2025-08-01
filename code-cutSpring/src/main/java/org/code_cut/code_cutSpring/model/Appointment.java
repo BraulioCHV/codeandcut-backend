@@ -20,7 +20,8 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idappointment")
-    private Long id;
+    //modificacion de lomg a integer; el tipo de dato INT de una base de datos corresponde directamente con el tipo Integer
+    private Integer idAppointment;
 
     @Column  (name = "datehour", nullable = false)
     private LocalDateTime dateHour;
