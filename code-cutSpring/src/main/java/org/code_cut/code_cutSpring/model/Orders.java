@@ -36,5 +36,11 @@ public class Orders {
     //Relacion Inversa - Payment - Uno a uno
     @OneToOne(mappedBy = "orders", cascade = CascadeType.ALL,orphanRemoval = true)
     private Payment payment;
+    @OneToOne(mappedBy = "orders", cascade = CascadeType.ALL,orphanRemoval = true)
+    private DetailsOrder detailsOrder;
+    public void addPayment(Payment payment) {
+        this.payment = payment;
+        payment.setOrders(this);
+    }
 
 }
