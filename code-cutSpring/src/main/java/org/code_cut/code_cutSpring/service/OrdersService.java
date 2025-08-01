@@ -1,5 +1,6 @@
 package org.code_cut.code_cutSpring.service;
 
+import org.code_cut.code_cutSpring.dto.DetailsOrderRequest;
 import org.code_cut.code_cutSpring.dto.PaymentRequest;
 import org.code_cut.code_cutSpring.dto.UserRequest;
 import org.code_cut.code_cutSpring.model.Orders;
@@ -21,4 +22,6 @@ public interface OrdersService {
     Orders addOrderToPayment(Long orderId, PaymentRequest paymentRequest);
     //Añadir usuario a orden
     Orders addUserToOrder(Long orderId, int userId);
+    //Añadir detalles orden a orden
+    Orders addDetailsToOrder(Long orderId, DetailsOrderRequest detailsOrderRequest);
 }
