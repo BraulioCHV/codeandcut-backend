@@ -1,10 +1,13 @@
 package org.code_cut.code_cutSpring.service;
 
+import org.code_cut.code_cutSpring.dto.DetailsOrderRequest;
 import org.code_cut.code_cutSpring.dto.PaymentRequest;
 import org.code_cut.code_cutSpring.dto.UserRequest;
+import org.code_cut.code_cutSpring.model.DetailsOrder;
 import org.code_cut.code_cutSpring.model.Orders;
 import org.code_cut.code_cutSpring.model.Payment;
 import org.code_cut.code_cutSpring.model.User;
+import org.code_cut.code_cutSpring.repository.DetailsOrderRepository;
 import org.code_cut.code_cutSpring.repository.OrdersRepository;
 import org.code_cut.code_cutSpring.repository.PaymentRepository;
 import org.code_cut.code_cutSpring.repository.UserRepository;
@@ -20,12 +23,14 @@ public class OrdersServiceImpl implements OrdersService{
     private final OrdersRepository ordersRepository;
     private final PaymentRepository paymentRepository;
     private final UserRepository userRepository;
+    private final DetailsOrderRepository detailsOrderRepository;
     //Inyección dependencias
     @Autowired
-    public OrdersServiceImpl(OrdersRepository ordersRepository, PaymentRepository paymentRepository, UserRepository userRepository) {
+    public OrdersServiceImpl(OrdersRepository ordersRepository, PaymentRepository paymentRepository, UserRepository userRepository, DetailsOrderRepository detailsOrderRepository) {
         this.ordersRepository = ordersRepository;
         this.paymentRepository = paymentRepository;
         this.userRepository = userRepository;
+        this.detailsOrderRepository = detailsOrderRepository;
     }
 
     @Override
@@ -94,6 +99,8 @@ public class OrdersServiceImpl implements OrdersService{
 
     }
 
+
+
     @Override
     public Orders addUserToOrder(Long orderId, int userId){
         Orders order = ordersRepository.findById(orderId)
@@ -105,5 +112,22 @@ public class OrdersServiceImpl implements OrdersService{
 
         return ordersRepository.save(order);
     }
+
+    @Override
+    public Orders addDetailsToOrder(Long orderId, DetailsOrderRequest detailsOrderRequest) {
+              Orders order = ordersRepository.findById(orderId)
+                .orElseThrow(() -> new IllegalArgumentException("La orden con ID " + orderId + " no existe"));
+
+        DetailsOrder detailsOrder = new DetailsOrder();
+        detailsOrder.setQtyProduct(detailsOrderRequest.getQtyProduct());
+
+
+        detailsOrder.setOrders(order);
+        detailsOrderRepository.save(detailsOrder);
+        order.setDetailsOrder(detailsOrder);
+        return ordersRepository.save(order);
+
+    }
+
 
 }
