@@ -1,10 +1,14 @@
 package org.code_cut.code_cutSpring.service;
 
 import org.code_cut.code_cutSpring.model.Appointment;
+import org.code_cut.code_cutSpring.model.Employee;
+import org.code_cut.code_cutSpring.model.Services;
 import org.code_cut.code_cutSpring.repository.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.localDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,4 +64,56 @@ public class AppointmentServiceImpl implements AppointmentService {
     public void deleteAppointment(Long id) {
         appointmentRepository.deleteById(id);
     }
+
+
+
+    @Override
+    public Appointment addServiceAndEmployee(Long id, Services service, Employee employee) {
+        Optional<Appointment> optionalAppointment = appointmentRepository.findById(id);
+
+        if (optionalAppointment.isPresent()) {
+            Appointment existingAppointment = optionalAppointment.get();
+
+            //validacion   para no sobrescribir null
+
+            if (service != null) {
+                existingAppointment.setServices(service);
+            }
+            if (employee != null) {
+                existingAppointment.setEmployee(employee);
+            }
+
+            return appointmentRepository.save(existingAppointment);
+        }
+        return null;
+    }
+
+
+
+    public List<Appointment> getAppointmentByDateHour(LocalDateTime dateHour) {
+        return appointmentRepository.findByDateHour(dateHour);
+    }
+
+
+    public List<Appointment> getAppointmentByStatus(String status) {
+        return appointmentRepository.findByStatus(status);
+    }
+
+
+
+    public List<Appointment> getAppointmentByEmployee(Employee employee) {
+        return appointmentRepository.findByEmployee(employee);
+    }
+
+
+    public List<Appointment> getAppointmentByService(Services service) {
+        return appointmentRepository.findByService(service);
+    }
+
 }
+
+
+
+
+
+
