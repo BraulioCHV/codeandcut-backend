@@ -36,4 +36,6 @@ public class ProductsController {
     public Products updateProductById(@PathVariable("productId") int id, @RequestBody Products productUpdated){
         return this.productsService.updateProductById(id, productUpdated);
     }
+
+
 }

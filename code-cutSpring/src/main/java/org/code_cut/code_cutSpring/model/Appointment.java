@@ -29,7 +29,7 @@ public class Appointment {
     private String status;
 
     @ManyToOne//(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_idusers", nullable = false)
+    @JoinColumn(name = "users_iduser ", nullable = false)
     @JsonIgnore
     //@Column
     private User user;
