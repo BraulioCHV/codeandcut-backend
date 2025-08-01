@@ -41,7 +41,7 @@ public class DetailsOrderServiceImpl implements DetailsOrderService {
     @Override
     public DetailsOrder addDetailIntoOrder(Long id, Orders order) {
         DetailsOrder detail = detailsOrderRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("El detalle de orden seleccionado con ID "+id+" no fue encontrado"));
+                .orElseThrow(() -> new RuntimeException("El detalle de orden seleccionado con la ID "+id+" no fue encontrado"));
         if (order == null) {
             throw new RuntimeException("La orden no puede estar vacía");
         }
