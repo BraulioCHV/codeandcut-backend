@@ -1,6 +1,9 @@
 package org.code_cut.code_cutSpring.service;
 
+import org.code_cut.code_cutSpring.dto.DetailsOrderRequest;
+import org.code_cut.code_cutSpring.model.DetailsOrder;
 import org.code_cut.code_cutSpring.model.Products;
+import org.code_cut.code_cutSpring.repository.DetailsOrderRepository;
 import org.code_cut.code_cutSpring.repository.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,11 +14,14 @@ import java.util.Optional;
 @Service
 public class ProductsServiceImpl implements ProductsService {
     private final ProductsRepository productsRepository;
+    @Autowired
+    private DetailsOrderRepository detailsOrderRepository;
 
     @Autowired
     public ProductsServiceImpl(ProductsRepository productsRepository) {
         this.productsRepository = productsRepository;
     }
+
 
     @Override
     public List<Products> getAllProducts() {
@@ -58,5 +64,13 @@ public class ProductsServiceImpl implements ProductsService {
         if(productUpdate.getStock() != 0) originalProduct.setStock(productUpdate.getStock());
         if(productUpdate.getPrice() != null) originalProduct.setPrice(productUpdate.getPrice());
         return productsRepository.save(originalProduct);
+    }
+
+    @Override
+    public Products addProductintoDetailOrders(int id, DetailsOrderRequest detailsOrderRequest) {
+        Products product = productsRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("El producto con el id "+id+" no existe"));
+        DetailsOrder detailsOrder = detailsOrderRepository.findById(detailsOrderRequest.getIdDetailsOrder()).orElseThrow(() -> new IllegalArgumentException("El detalle del pedido "+detailsOrderRequest.getIdDetailsOrder()+" no existe"));
+        product.setDetailsOrder(detailsOrder);
+        return productsRepository.save(product);
     }
 }

@@ -19,24 +19,17 @@ public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idAppointment")
     @Column(name = "idappointment")
     private Long id;
 
-    @Column  (name = "DateHour", nullable = false)
     @Column  (name = "datehour", nullable = false)
     private LocalDateTime dateHour;
 
-    @Column(name = "Status", nullable = false, length = 45)
     @Column(name = "status", nullable = false, length = 45)
     private String status;
 
-    //    @ManyToOne(fetch = FetchType.LAZY)
-//  @JoinColumn(name = "user_idUser", nullable = false)
-//  @Column
-    //  private User user;
     @ManyToOne//(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_idusers", nullable = false)
+    @JoinColumn(name = "users_iduser", nullable = false)
     @JsonIgnore
     //@Column
     private User user;

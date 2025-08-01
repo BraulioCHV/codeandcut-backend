@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400&family=Open+Sans:wght@400;600;800&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet');
+  
+body {
+  background-color: #0D121E;
+  margin: 0;
+  padding: 0%;
+  overflow-x: hidden;
+}
+
+/* CSS del Navbar*/
+.navbar {
+  background-color: #000000;
+}
+
+.navbarLogoImg {
+  width: 60px;
+  height: 60px;
+}
+
+.navTextLogo {
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.nav-link {
+  color: #ffffff !important;
+  font-family: 'Poppins', sans-serif;
+  margin-left: 1rem;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #F0B35B !important;
+}
+
+/* Aplica color dorado al enlace activo */
+.nav-link.active {
+  color: #F0B35B !important;
+  font-weight: bold;
+  text-decoration: underline;
+}
+/*Termina CSS de Navbar*/
+  .hero {
+    position: relative;
+    width: 100%;
+  height: 50vh;
+  overflow: hidden;
+   margin: 0;      
+  padding: 0;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.hero-overlay {
+  background-color: rgba(0, 0, 0, 0.5); 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-content {
+   position: absolute;
+    font-size: 3.81rem;
+   top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+   z-index: 2;
+}
+
+.titulo-c {
+   font-family: 'Bebas Neue', sans-serif;
+ font-size: 3.81rem;
+  font-weight: 400;
+}
+
+@media (min-width: 1400px) {
+  .titulo-c {
+   font-size: 3.81rem;
+  }
+}
+
+@media (min-width: 576px) {
+  .titulo-c {
+    font-size: 3.81rem;
+  }
+}
+
+
+
+.btn-primary {
+  background-color: #F0B35B;
+  border: none;
+}
+
+@media (max-width: 1400px) {
+
+.hero {
+height: 40vh;
+padding: 20px;
+ }
+}
+
+@media (min-width: 576px) {
+.hero h1 {
+font-size: 2rem;
+}
+
+.hero {
+height: 40vh;
+padding: 20px;
+ }
+}
+
+.warnings{
+    text-align: center;
+    margin: auto;
+    color: pink;
+}
