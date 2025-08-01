@@ -29,7 +29,7 @@ public class Orders {
 
     //Realcion tablas - usuario llave foranea
     @ManyToOne
-    @JoinColumn(name = "user_idusers", nullable = false)
+    @JoinColumn(name = "users_iduser", nullable = false)
     //Evitar ciclo infinito
     @JsonIgnore
     private User user;
