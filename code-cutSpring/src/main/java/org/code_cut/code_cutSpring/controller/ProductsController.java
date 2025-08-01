@@ -1,8 +1,11 @@
 package org.code_cut.code_cutSpring.controller;
 
 import lombok.AllArgsConstructor;
+import org.code_cut.code_cutSpring.dto.DetailsOrderRequest;
+import org.code_cut.code_cutSpring.model.Orders;
 import org.code_cut.code_cutSpring.model.Products;
 import org.code_cut.code_cutSpring.service.ProductsService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,5 +40,10 @@ public class ProductsController {
         return this.productsService.updateProductById(id, productUpdated);
     }
 
-
+    //Wiring to order to detiailsorder
+    @PostMapping("/{productId}/detailsorder")
+    public ResponseEntity<Products> addProductintoDetailOrders(@PathVariable("productId") int id, @RequestBody DetailsOrderRequest detailsOrderRequest){
+        Products product = productsService.addProductintoDetailOrders(id, detailsOrderRequest);
+        return ResponseEntity.ok(product);
+    }
 }
