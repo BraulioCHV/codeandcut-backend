@@ -1,17 +1,13 @@
-import {addUser} from "./services/api.js";
+import { addUser } from './services/userService.js';
 
-const registerForm = document.querySelector("form");
-
-
-registerForm.addEventListener("submit",async (e) => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const data = Object.fromEntries([... new FormData(registerForm)]);
-  try{
-   const response = await addUser(data);
-   alert("Registro exitoso");
-  window.location.href = "./pages/Login/login.html"
-  console.log(response.ok)
-  }catch(err){
-    alert("algo salio mal")
+  const data = Object.fromEntries(new FormData(form));
+  try {
+    await addUser(data);
+    alert("Usuario creado con éxito");
+  } catch (err) {
+    console.error(err);
+    alert("Error al registrar usuario");
   }
-})
+});
